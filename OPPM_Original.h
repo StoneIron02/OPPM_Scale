@@ -26,7 +26,8 @@ void Compute_Failure_Function(const vector<int>& P, const vector<int>& LMax_P, c
     }
 }
 
-void OPPM_Original_Matcher(const vector<int>& T, const vector<int>& P, const vector<int>& LMax_P, const vector<int>& LMin_P, const vector<int>& pi_P) {
+unsigned int OPPM_Original_Matcher(const vector<int>& T, const vector<int>& P, const vector<int>& LMax_P, const vector<int>& LMin_P, const vector<int>& pi_P) {
+    unsigned int matchCount = 0;
     unsigned int n = T.size(), m = P.size();
     int q = 0;
     for (int i = 0; i < n; i++) {
@@ -41,10 +42,12 @@ void OPPM_Original_Matcher(const vector<int>& T, const vector<int>& P, const vec
         }
         q++;
         if (q == m) {
+            matchCount++;
             cout << "MATCH: T[" << (i - m + 1) << ".." << i << "]\n";
             q = pi_P[q - 1];
         }
     }
+    return matchCount;
 }
 
 #endif //OPPM_SCALE_OPPM_ORIGINAL_H

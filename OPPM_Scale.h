@@ -21,7 +21,8 @@ void Compute_Extend_Table(const vector<int>& T, vector<int>& E_T) {
     }
 }
 
-void OPPM_Scale_Matcher(const vector<int>& T, const vector<int>& P, const int k, const vector<int>& E_T, const vector<int>& LMax_P, const vector<int>& LMin_P, const vector<int>& pi_P) {
+unsigned int OPPM_Scale_Matcher(const vector<int>& T, const vector<int>& P, const int k, const vector<int>& E_T, const vector<int>& LMax_P, const vector<int>& LMin_P, const vector<int>& pi_P) {
+    unsigned int matchCount = 0;
     unsigned int m = P.size(), n = T.size();
     for (int t = 0; t <= k - 1; t++) {
         int i = t, j = 1;
@@ -42,12 +43,14 @@ void OPPM_Scale_Matcher(const vector<int>& T, const vector<int>& P, const int k,
             }
             j++;
             if (j == m) {
+                matchCount++;
                 cout << "MATCH: T[" << i << ".." << (i + m * k - 1) << "]\n";
                 i = i + (j - pi_P[j - 1]) * k;
                 j = pi_P[j - 1];
             }
         }
     }
+    return matchCount;
 }
 
 #endif //OPPM_SCALE_OPPM_SCALE_H
